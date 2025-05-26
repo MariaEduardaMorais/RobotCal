@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcubot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">Calcubot 🤖✨</div>
+      <nav>
+        <ul>
+          <li><a href="#graficos">Gráficos</a></li>
+          <li><a href="#calculos">Cálculos</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#interface">Interface</a></li>
+        </ul>
+      </nav>
+    </div>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌗</button>
+  </header>
+
+  <main>
+    <section id="graficos" class="card">
+      <h2>Visualização de Gráficos</h2>
+      <div class="grafico-placeholder">[ Gráfico será exibido aqui ]</div>
+    </section>
+
+    <section id="calculos" class="card">
+      <h2>Cálculos Derivados do Movimento</h2>
+      <p>Espaço para fórmulas ou resultados com base no movimento do robô.</p>
+    </section>
+
+    <section id="sobre" class="card">
+      <h2>Sobre o Projeto</h2>
+      <p>Este projeto visa mostrar que até um robô pode ensinar cálculo melhor que um quadro branco 👀.</p>
+    </section>
+
+    <section id="interface" class="card">
+      <h2>Interface em Desenvolvimento</h2>
+      <p>Aqui será adicionada a interface que mostra a movimentação do robô e sua coleta de dados, tornando a aprendizagem visual e prática para estudantes de Cálculo 1.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p id="footer-rotativo"></p>
+    <div class="social-icons">
+      <a href="https://github.com/eduardinha-dev" target="_blank" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.385.6.112.793-.26.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.933 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.018.005 2.044.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.649.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.192.694.8.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/eduardinha-dev" target="_blank" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.728v20.543C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.728V1.728C24 .774 23.208 0 22.23 0zM7.061 20.452H3.577V9h3.484v11.452zM5.32 7.579a2.018 2.018 0 1 1 0-4.036 2.018 2.018 0 0 1 0 4.036zm15.132 12.873h-3.484v-5.598c0-1.336-.027-3.054-1.863-3.054-1.865 0-2.15 1.455-2.15 2.96v5.692h-3.484V9h3.344v1.561h.048c.467-.888 1.61-1.82 3.315-1.82 3.545 0 4.198 2.336 4.198 5.376v6.335z"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    ScrollReveal().reveal('.card', {
+      origin: 'bottom',
+      distance: '30px',
+      duration: 800,
+      easing: 'ease-out',
+      interval: 200
+    });
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    const frasesFooter = [
+      "© 2025 Calcubot. Desenvolvido por Gabrielly Vitória e Maria Eduarda (com muito café).",
+      "Desenvolvido com lógica e muito café ☕.",
+      "Cálculo nunca foi tão robótico 🤖.",
+      "Até o robô entendeu derivada, e você?",
+      "Dica do robô: não derive na dúvida.",
+      "RobôLógico 3000 te ajuda mais que aquele quadro branco 👀."
+    ];
+
+    let indice = 0;
+    const elementoFooter = document.getElementById("footer-rotativo");
+
+    function trocarFrase() {
+      elementoFooter.style.opacity = 0;
+
+      setTimeout(() => {
+        elementoFooter.textContent = frasesFooter[indice];
+        elementoFooter.style.opacity = 1;
+        indice = (indice + 1) % frasesFooter.length;
+      }, 1000);
+    }
+
+    elementoFooter.textContent = frasesFooter[0];
+    setInterval(trocarFrase, 4000);
+  </script>
+</body>
+</html>

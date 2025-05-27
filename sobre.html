@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calcubot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Sobre - Calcubot</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,10 +12,10 @@
       <div class="logo">Calcubot 🤖✨</div>
       <nav>
         <ul>
-          <li><a href="#graficos">Gráficos</a></li>
-          <li><a href="#calculos">Cálculos</a></li>
+          <li><a href="index.html#graficos">Gráficos</a></li>
+          <li><a href="index.html#calculos">Cálculos</a></li>
           <li><a href="sobre.html">Sobre</a></li>
-          <li><a href="#interface">Interface</a></li>
+          <li><a href="index.html#interface">Interface</a></li>
         </ul>
       </nav>
     </div>
@@ -24,16 +23,15 @@
   </header>
 
   <main>
-    <section id="graficos" class="card">
-      <h2>Visualização de Gráficos</h2>
-      <div class="grafico-placeholder">[ Gráfico será exibido aqui ]</div>
+    <section class="card">
+      <h2>Sobre o Projeto</h2>
+      <p>O Calcubot é uma iniciativa que une programação e cálculo para facilitar o aprendizado de conceitos como derivadas e movimento retilíneo. Através de um robô com sensores, coletamos dados reais que são convertidos em gráficos e cálculos visuais.</p>
     </section>
 
-    <section id="calculos" class="card">
-      <h2>Cálculos Derivados do Movimento</h2>
-      <p>Espaço para fórmulas ou resultados com base no movimento do robô.</p>
+    <section class="card">
+      <h2>Quem Desenvolveu?</h2>
+      <p>Este projeto foi idealizado e desenvolvido por Maria Eduarda e Gabrielly Vitória, alunas do curso de Sistemas de Informação no IFMG - Campus Ouro Branco.</p>
     </section>
-  
   </main>
 
   <footer>
@@ -91,6 +89,12 @@
 
     elementoFooter.textContent = frasesFooter[0];
     setInterval(trocarFrase, 4000);
+  </script>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
   </script>
 </body>
 </html>

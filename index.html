@@ -4,71 +4,118 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calcubot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  
+  <script src="script.js" defer></script>
 </head>
-<body>
-  <header>
-    <div class="header-content">
-      <div class="logo">Calcubot 🤖✨</div>
-      <nav>
-        <ul>
-          <li><a href="#graficos">Gráficos</a></li>
-          <li><a href="#calculos">Cálculos</a></li>
-          <li><a href="sobre.html">Sobre</a></li>
+<body class="bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+
+  <header class="bg-white shadow-md py-4 px-6 md:px-12 dark:bg-gray-800 rounded-b-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="logo text-2xl font-bold text-blue-600 dark:text-blue-400">Calcubot 🤖✨</div>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6">
+          <li><a href="#graficos" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Gráficos e Cálculos</a></li>
+          <li><a href="sobre.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Sobre</a></li>
         </ul>
       </nav>
+      <button class="toggle-btn bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200" onclick="toggleDarkMode()" aria-label="Alternar Modo Escuro">
+        🌗
+      </button>
     </div>
-    <button class="toggle-btn" onclick="toggleDarkMode()">🌗</button>
   </header>
 
-  <main>
-    <section id="graficos" class="card">
-      <h2>Visualização de Gráficos</h2>
-      <div class="grafico-placeholder">[ Gráfico será exibido aqui ]</div>
+  <main class="max-w-7xl mx-auto py-8 px-4 md:px-8">
+    <section id="graficos" class="card bg-white p-6 rounded-lg shadow-lg mb-8 dark:bg-gray-800">
+      <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">Visualização de Gráficos</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="chart-container">
+          <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Distância vs Tempo</h3>
+          <canvas id="graficoMovimento" class="w-full h-auto"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Velocidade vs Tempo</h3>
+          <canvas id="graficoVelocidade" class="w-full h-auto"></canvas>
+        </div>
+      </div>
     </section>
 
-    <section id="calculos" class="card">
-      <h2>Cálculos Derivados do Movimento</h2>
-      <p>Espaço para fórmulas ou resultados com base no movimento do robô.</p>
-    </section>
-  
+    <section id="calculos" class="card bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800">
+      </section>
   </main>
 
-  <footer>
-    <p id="footer-rotativo"></p>
-    <div class="social-icons">
-      <a href="https://github.com/MariaEduardaMorais" target="_blank" aria-label="GitHub Maria Eduarda">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.385.6.112.793-.26.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.933 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.018.005 2.044.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.649.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.192.694.8.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/maria-eduarda-m-4a7181262/" target="_blank" aria-label="LinkedIn Maria Eduarda">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.728v20.543C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.728V1.728C24 .774 23.208 0 22.23 0zM7.061 20.452H3.577V9h3.484v11.452zM5.32 7.579a2.018 2.018 0 1 1 0-4.036 2.018 2.018 0 0 1 0 4.036zm15.132 12.873h-3.484v-5.598c0-1.336-.027-3.054-1.863-3.054-1.865 0-2.15 1.455-2.15 2.96v5.692h-3.484V9h3.344v1.561h.048c.467-.888 1.61-1.82 3.315-1.82 3.545 0 4.198 2.336 4.198 5.376v6.335z"/></svg>
-      </a>
-      <a href="https://github.com/GabriellyVitoria5" target="_blank" aria-label="GitHub Gabrielly">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.385.6.112.793-.26.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.933 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.018.005 2.044.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.649.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.192.694.8.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/gabrielly-assunção-41aa261a7/" target="_blank" aria-label="LinkedIn Gabrielly">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.728v20.543C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.728V1.728C24 .774 23.208 0 22.23 0zM7.061 20.452H3.577V9h3.484v11.452zM5.32 7.579a2.018 2.018 0 1 1 0-4.036 2.018 2.018 0 0 1 0 4.036zm15.132 12.873h-3.484v-5.598c0-1.336-.027-3.054-1.863-3.054-1.865 0-2.15 1.455-2.15 2.96v5.692h-3.484V9h3.344v1.561h.048c.467-.888 1.61-1.82 3.315-1.82 3.545 0 4.198 2.336 4.198 5.376v6.335z"/></svg>
-      </a>
+  <footer class="bg-gray-200 dark:bg-gray-800 py-6 px-4 md:px-8 mt-8 rounded-t-lg shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
+      <p id="footer-rotativo" class="mb-4 md:mb-0 text-center md:text-left transition-opacity duration-1000"></p>
+      <div class="social-icons flex space-x-4">
+        <a href="https://github.com/MariaEduardaMorais" target="_blank" aria-label="GitHub Maria Eduarda" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.385.6.112.793-.26.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.933 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.018.005 2.044.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.649.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.192.694.8.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/maria-eduarda-m-4a7181262/" target="_blank" aria-label="LinkedIn Maria Eduarda" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.728v20.543C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.728V1.728C24 .774 23.208 0 22.23 0zM7.061 20.452H3.577V9h3.484v11.452zM5.32 7.579a2.018 2.018 0 1 1 0-4.036 2.018 2.018 0 0 1 0 4.036zm15.132 12.873h-3.484v-5.598c0-1.336-.027-3.054-1.863-3.054-1.865 0-2.15 1.455-2.15 2.96v5.692h-3.484V9h3.344v1.561h.048c.467-.888 1.61-1.82 3.315-1.82 3.545 0 4.198 2.336 4.198 5.376v6.335z"/></svg>
+        </a>
+        <a href="https://github.com/GabriellyVitoria5" target="_blank" aria-label="GitHub Gabrielly" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.207 11.385.6.112.793-.26.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.467-1.334-5.467-5.933 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.527.117-3.176 0 0 1.008-.322 3.3 1.23a11.48 11.48 0 0 1 3.003-.404c1.018.005 2.044.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.649.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.192.694.8.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/gabrielly-assunção-41aa261a7/" target="_blank" aria-label="LinkedIn Gabrielly" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M22.23 0H1.77C.792 0 0 .774 0 1.728v20.543C0 23.227.792 24 1.77 24h20.46c.978 0 1.77-.773 1.77-1.728V1.728C24 .774 23.208 0 22.23 0zM7.061 20.452H3.577V9h3.484v11.452zM5.32 7.579a2.018 2.018 0 1 1 0-4.036 2.018 2.018 0 0 1 0 4.036zm15.132 12.873h-3.484v-5.598c0-1.336-.027-3.054-1.863-3.054-1.865 0-2.15 1.455-2.15 2.96v5.692h-3.484V9h3.344v1.561h.048c.467-.888 1.61-1.82 3.315-1.82 3.545 0 4.198 2.336 4.198 5.376v6.335z"/></svg>
+        </a>
+      </div>
     </div>
   </footer>
 
-  <script src="https://unpkg.com/scrollreveal"></script>
   <script>
-    ScrollReveal().reveal('.card', {
-      origin: 'bottom',
-      distance: '30px',
-      duration: 800,
-      easing: 'ease-out',
-      interval: 200
-    });
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
+    if (typeof ScrollReveal !== 'undefined') {
+      ScrollReveal().reveal('.card', {
+        origin: 'bottom',
+        distance: '30px',
+        duration: 800,
+        easing: 'ease-out',
+        interval: 200
+      });
     }
 
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+  
+      if (document.body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    function loadTheme() {
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark');
+        }
+    }
+    
+    loadTheme();
+
     const frasesFooter = [
-      "© 2025 Calcubot. Desenvolvido por Gabrielly Vitória e Maria Eduarda (com muito café).",
+      "© 2025 Calcubot. Desenvolvido por Gabrielly Vitória e Maria Eduarda.",
       "Cálculo nunca foi tão robótico 🤖.",
       "Até o robô entendeu derivada, e você?",
       "Desenvolvido com lógica e muito café ☕.",
@@ -80,16 +127,21 @@
     const elementoFooter = document.getElementById("footer-rotativo");
 
     function trocarFrase() {
-      elementoFooter.style.opacity = 0;
-      setTimeout(() => {
-        elementoFooter.textContent = frasesFooter[indice];
-        elementoFooter.style.opacity = 1;
-        indice = (indice + 1) % frasesFooter.length;
-      }, 1000);
+        if (elementoFooter) {
+            elementoFooter.style.opacity = 0;
+            setTimeout(() => {
+                elementoFooter.textContent = frasesFooter[indice];
+                elementoFooter.style.opacity = 1;
+                indice = (indice + 1) % frasesFooter.length;
+            }, 1000);
+        }
     }
 
-    elementoFooter.textContent = frasesFooter[0];
-    setInterval(trocarFrase, 4000);
+    if (elementoFooter) {
+        elementoFooter.textContent = frasesFooter[0];
+        setInterval(trocarFrase, 4000);
+    }
   </script>
+
 </body>
 </html>

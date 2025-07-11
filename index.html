@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calcubot</title>
+  <title>Calcubot - A Prática do Cálculo</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -26,68 +25,75 @@
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
-  <script src="https://unpkg.com/scrollreveal"></script>
   <script src="scriptAPI.js" defer></script>
 </head>
-
 <body class="bg-gray-100 font-sans text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
   <header class="bg-white shadow-md py-4 px-6 md:px-12 dark:bg-gray-800 rounded-b-lg">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="logo text-2xl font-bold text-blue-600 dark:text-blue-400">Calcubot 🤖✨</div>
       <nav class="hidden md:block">
         <ul class="flex space-x-6">
-          <li><a href="#graficos"
-              class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Gráficos
-              e Cálculos</a></li>
-          <li><a href="sobre.html"
-              class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Sobre</a>
-          </li>
+          <li><a href="#controles" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Controles</a></li>
+          <li><a href="#analise" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Análise</a></li>
+          <li><a href="sobre.html" class="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors duration-200">Sobre</a></li>
         </ul>
       </nav>
-      <button
-        class="toggle-btn bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
+      <button class="toggle-btn bg-gray-200 dark:bg-gray-700 p-2 rounded-full shadow-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200"
         onclick="toggleDarkMode()" aria-label="Alternar Modo Escuro">🌗</button>
     </div>
   </header>
 
   <main class="max-w-7xl mx-auto py-8 px-4 md:px-8">
-    <div class="flex flex-wrap items-center gap-4 mb-4">
-      <button id="togglePause"
-        class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">⏸️ Pausar</button>
-      <button id="resetData" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">🔄
-        Resetar Análise</button>
-      <label for="grauPolinomio" class="font-semibold text-gray-800 dark:text-gray-200 ml-4">Grau do Polinômio:</label>
-      <select id="grauPolinomio"
-        class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-3 py-1 rounded">
-        <option value="1">1 (linear)</option>
-        <option value="2">2 (quadrático)</option>
-        <option value="3" selected>3 (cúbico)</option>
-        <option value="4">4</option>
-      </select>
-    </div>
-
-    <section id="graficos" class="card bg-white p-6 rounded-lg shadow-lg mb-8 dark:bg-gray-800">
-      <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">Visualização de Gráficos</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="chart-container">
-          <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Distância vs Tempo</h3>
-          <canvas id="graficoMovimento"></canvas>
+    <!-- SEÇÃO DE CONTROLES -->
+    <section id="controles" class="card bg-white p-6 rounded-lg shadow-lg mb-8 dark:bg-gray-800">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-blue-400">Comandar Percurso do Robô</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">Selecione um percurso para o robô executar. A análise dos dados aparecerá em tempo real abaixo.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <button data-comando="quadrado" class="comando-btn px-5 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">Fazer um Quadrado</button>
+          <button data-comando="circulo" class="comando-btn px-5 py-2 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-700 transition">Fazer um Círculo</button>
+          <button data-comando="frente_tras" class="comando-btn px-5 py-2 bg-rose-600 text-white rounded-lg shadow hover:bg-rose-700 transition">Ir e Voltar</button>
+          <button data-comando="parar" class="comando-btn px-5 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600 transition">Parar Imediatamente</button>
         </div>
-        <div class="chart-container">
-          <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Velocidade vs Tempo</h3>
-          <canvas id="graficoVelocidade"></canvas>
-        </div>
-      </div>
     </section>
 
-    <section id="calculos" class="card bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800"></section>
+    <!-- SEÇÃO DE ANÁLISE -->
+    <section id="analise" class="card bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800">
+        <div id="graficos" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div class="chart-container">
+              <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Posição vs Tempo</h3>
+              <canvas id="graficoPosicao"></canvas>
+            </div>
+            <div class="chart-container">
+              <h3 class="text-xl font-semibold mb-2 text-gray-700 dark:text-gray-300">Gráfico de Velocidade vs Tempo</h3>
+              <canvas id="graficoVelocidade"></canvas>
+            </div>
+        </div>
+        
+        <div>
+            <div class="border-b border-gray-200 dark:border-gray-700">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600" data-tab="limite">
+                        Limite
+                    </button>
+                    <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300" data-tab="derivada">
+                        Derivada
+                    </button>
+                    <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300" data-tab="integral">
+                        Integral
+                    </button>
+                </nav>
+            </div>
+            <div id="calculos-content" class="mt-6">
+                <div class="tab-pane" id="content-limite"></div>
+                <div class="tab-pane hidden" id="content-derivada"></div>
+                <div class="tab-pane hidden" id="content-integral"></div>
+            </div>
+        </div>
+    </section>
   </main>
 
   <footer class="bg-gray-200 dark:bg-gray-800 py-6 px-4 md:px-8 mt-8 rounded-t-lg shadow-inner">
-    <div
-      class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
-      <p id="footer-rotativo" class="mb-4 md:mb-0 text-center md:text-left transition-opacity duration-1000"></p>
-    </div>
+      <p class="text-center text-gray-600 dark:text-gray-400 text-sm">© 2025 Calcubot. Desenvolvido por Gabrielly e Maria Eduarda.</p>
   </footer>
 
   <script>
@@ -102,26 +108,6 @@
       }
     }
     loadTheme();
-    const frasesFooter = [
-      "© 2025 Calcubot. Desenvolvido por Gabrielly e Maria Eduarda.",
-      "Cálculo nunca foi tão robótico 🤖.",
-      "Até o robô entendeu derivada, e você?",
-      "Desenvolvido com lógica e muito café ☕.",
-      "Dica do robô: não derive na dúvida.",
-    ];
-    let indice = 0;
-    const elementoFooter = document.getElementById("footer-rotativo");
-    function trocarFrase() {
-      elementoFooter.style.opacity = 0;
-      setTimeout(() => {
-        elementoFooter.textContent = frasesFooter[indice];
-        elementoFooter.style.opacity = 1;
-        indice = (indice + 1) % frasesFooter.length;
-      }, 1000);
-    }
-    elementoFooter.textContent = frasesFooter[0];
-    setInterval(trocarFrase, 4000);
   </script>
 </body>
-
 </html>

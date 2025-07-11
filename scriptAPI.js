@@ -4,7 +4,7 @@ let dados = []; // Armazena o histórico de dados: tempo, distancia, velocidade
 let tempoInicial = 0;
 
 function atualizarDados() {
-  fetch('http://192.168.2.131:3000/api/dados')
+  fetch('http://192.168.2.131:3000/api/dados') 
     .then(res => {
       if (!res.ok) throw new Error(`Erro na rede: ${res.statusText}`);
       return res.json();
@@ -50,7 +50,23 @@ function renderizarAbasDeCalculo() {
     const areaDerivada = document.getElementById("content-derivada");
     const areaIntegral = document.getElementById("content-integral");
 
-    if (!areaLimite || !areaDerivada || !areaIntegral) return;
+    if (!areaLimite || !areaDerivada || !areaIntegral) return; 
+
+    if (dados.length < 2) {
+        const msg = `<p class="mt-4 text-center text-lg font-semibold text-gray-800 dark:text-gray-200">Aguardando movimento para iniciar a análise...</p>`;
+        areaLimite.innerHTML = msg;
+        areaDerivada.innerHTML = msg;
+        areaIntegral.innerHTML = msg;
+        return;
+    }
+
+    const p2 = dados[dados.length - 1];
+    const p1 = dados[dados.length - 2];
+
+    const dt = p2.tempo - p1.tempo;
+    const ds = p2.distancia - p1.distancia;
+    const velocidadeMedia = (dt > 1e-9) ? ds / dt : 0;
+    const distanciaTotal = p2.distancia;
 
     areaLimite.innerHTML = `
         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">O Conceito de Limite</h3>
@@ -65,21 +81,6 @@ function renderizarAbasDeCalculo() {
             </div>
         </div>
     `;
-
-    if (dados.length < 2) {
-        const msg = `<p class="mt-4 text-center text-lg font-semibold text-gray-800 dark:text-gray-200">Aguardando movimento para iniciar a análise...</p>`;
-        areaDerivada.innerHTML = msg;
-        areaIntegral.innerHTML = msg;
-        return;
-    }
-
-    const p2 = dados[dados.length - 1];
-    const p1 = dados[dados.length - 2];
-
-    const dt = p2.tempo - p1.tempo;
-    const ds = p2.distancia - p1.distancia;
-    const velocidadeMedia = (dt > 1e-9) ? ds / dt : 0;
-    const distanciaTotal = p2.distancia;
 
     areaDerivada.innerHTML = `
         <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">A Derivada na Prática</h3>
